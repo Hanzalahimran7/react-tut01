@@ -6,7 +6,7 @@ import './index.css'
 function App() {
   return (
     <div className="App">
-      <Header />
+      <Header title="Hanzalah's grocerries" />
       <Content />
       <Footer />
     </div>

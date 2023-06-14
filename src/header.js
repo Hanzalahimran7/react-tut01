@@ -1,12 +1,16 @@
-const Header = () => {
+const Header = ({title}) => {
 
     return(
         <header >
             <h1>
-                Grocerries List
+                {title}
             </h1>
         </header>
     )
+}
+
+Header.defaultPtops = {
+    title: "Default Title"
 }
 
 export default Header;
