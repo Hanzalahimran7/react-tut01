@@ -9,7 +9,7 @@ const Header = ({title}) => {
     )
 }
 
-Header.defaultPtops = {
+Header.defaultProps = {
     title: "Default Title"
 }
 
