@@ -1,4 +1,5 @@
 import Header from './header';
+import AddItem from './AddItem';
 import Content from './Content';
 import Footer from './Footer';
 import './index.css'
@@ -40,6 +41,7 @@ const handleDelete = (id) => {
   return (
     <div className="App">
       <Header title="Hanzalah's grocerries" />
+      <AddItem/>
       <Content items={items} handleCheck={handleCheck} handleDelete={handleDelete} />
       <Footer length={items.length}/>
     </div>
