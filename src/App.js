@@ -1,6 +1,7 @@
 import Header from './header';
 import AddItem from './AddItem';
 import Content from './Content';
+import SearchItem from './SearchItem';
 import Footer from './Footer';
 import './index.css'
 import { useState } from "react";
@@ -11,6 +12,7 @@ function App() {
 
 
 const [newItem, setNewItem] = useState('')
+const [search, setSearch] = useState('')
 
 const setAndStateItems = (newItems) => {
   setItems(newItems)
@@ -50,7 +52,8 @@ const handleDelete = (id) => {
     <div className="App">
       <Header title="Hanzalah's grocerries" />
       <AddItem newItem={newItem} setNewItem={setNewItem} handleSubmit={handleSubmit}/>
-      <Content items={items} handleCheck={handleCheck} handleDelete={handleDelete} />
+      <SearchItem search={search} setSearch={setSearch} />
+      <Content items={items.filter(item => ((item.item).toLowerCase()).includes(search.toLowerCase()))} handleCheck={handleCheck} handleDelete={handleDelete} />
       <Footer length={items.length}/>
     </div>
   );
