@@ -6,42 +6,50 @@ import './index.css'
 import { useState } from "react";
 
 function App() {
-  const [items, setItems] = useState([
-    {
-        id: 1,
-        checked: false,
-        item: "Item 1"
-    },
-    {
-        id: 2,
-        checked: true,
-        item: "Item 2"
-    },
-    {
-        id: 3,
-        checked: false,
-        item: "Item 3"
-    },
-]);
+  const [items, setItems] = useState(JSON.parse(localStorage.getItem('shopping-list'))
+    );
+
+
+const [newItem, setNewItem] = useState('')
+
+const setAndStateItems = (newItems) => {
+  setItems(newItems)
+  localStorage.setItem('shopping-list', JSON.stringify(newItems))
+}
+
+const addItem = (item) => {
+  const id = items.length ? items[items.length -1].id + 1 : 1;
+  console.log(id)
+  const myNewItem = {id, checked:false, item};
+  const listItems = [...items, myNewItem]
+  setAndStateItems(listItems)
+}
+
+
+const handleSubmit = (e) =>{
+  e.preventDefault();
+  if (!newItem) return;
+  addItem(newItem)
+  setNewItem('')
+
+}
 
 const handleCheck = (id) => {
     console.log(id)
-    const listItems = items.map((item) => item.id === id ? {...item, checked: !item.checked } : item)
-    setItems(listItems)
-    localStorage.setItem('shopping-list', JSON.stringify(listItems))
+    const listItems = items.map((item) => item.id === id ? {...item, checked: !item.checked } : item);
+    setAndStateItems(listItems);
 }
 
 const handleDelete = (id) => {
     console.log(id)
     const listItems = items.filter((item) => item.id !== id)
-    setItems(listItems)
-    localStorage.setItem('shopping-list', JSON.stringify(listItems))
+    setAndStateItems(listItems);
 }
 
   return (
     <div className="App">
       <Header title="Hanzalah's grocerries" />
-      <AddItem/>
+      <AddItem newItem={newItem} setNewItem={setNewItem} handleSubmit={handleSubmit}/>
       <Content items={items} handleCheck={handleCheck} handleDelete={handleDelete} />
       <Footer length={items.length}/>
     </div>
